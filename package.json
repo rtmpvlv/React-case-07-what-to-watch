@@ -8,7 +8,7 @@
     "test": "npm run eslint",
     "build": "webpack --mode production",
     "start": "webpack-dev-server"
-},
+  },
   "devDependencies": {
     "@babel/core": "7.12.17",
     "@babel/preset-env": "7.12.17",
@@ -31,6 +31,7 @@
   "dependencies": {
     "axios": "0.21.4",
     "history": "4.10.1",
+    "nanoid": "^3.1.30",
     "prop-types": "15.7.2",
     "react": "16.14.0",
     "react-dom": "16.14.0",
