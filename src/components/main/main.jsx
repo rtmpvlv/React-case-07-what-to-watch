@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../film-card.js/film-card';
 import {FILM_DATA_TYPES} from '../types';
 import {nanoid} from 'nanoid';
+import HeaderLink from '../header-link/header-link';
 
 const Main = (props) => {
   const {title, genre, releaseYear} = props;
@@ -17,11 +18,7 @@ const Main = (props) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <HeaderLink/>
           </div>
 
           <div className="user-block">
