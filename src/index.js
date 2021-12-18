@@ -1,18 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
+import {App} from './components/app/app';
+import {adaptFilmToClient} from './adapter';
 
-const Setting = {
-  FILM_TITLE: `The Grand Budapest Hotel`,
-  FILM_GENRE: `Drama`,
-  FILM_RELEASE_YEAR: 2014,
-};
+import {films} from './mocks/films';
 
 ReactDOM.render(
     <App
-      title = {Setting.FILM_TITLE}
-      genre = {Setting.FILM_GENRE}
-      releaseYear = {Setting.FILM_RELEASE_YEAR}
+      filmsData = {films.map((film) => adaptFilmToClient(film))}
     />,
     document.querySelector(`#root`)
 );

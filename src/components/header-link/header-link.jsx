@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const HeaderLink = () => {
+export const HeaderLink = () => {
   return (
     <>
       <Link to={`/`} className="logo__link">
@@ -12,5 +12,3 @@ const HeaderLink = () => {
     </>
   );
 };
-
-export default HeaderLink;

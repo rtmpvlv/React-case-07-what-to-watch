@@ -1,12 +1,29 @@
 import React from 'react';
+import {useParams, useHistory} from 'react-router-dom/cjs/react-router-dom.min';
+import {FILMS_DATA_TYPES} from '../types';
 
-const Player = () => {
+
+export const Player = ({filmsData}) => {
+  const currentId = Number(useParams().id);
+  const currentFilm = filmsData.find((film) => film.id === currentId);
+
+  const {id, name, videoLink, previewImage} = currentFilm;
+
+  const history = useHistory();
+
+  const handleExitButton = () => {
+    history.push(`../films/${id}`);
+  };
+
   return (
     <>
       <div className="player">
-        <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
-
-        <button type="button" className="player__exit">Exit</button>
+        <video src={videoLink} className="player__video" poster={previewImage}></video>
+        <button
+          type="button"
+          className="player__exit"
+          onClick={handleExitButton}
+        >Exit</button>
 
         <div className="player__controls">
           <div className="player__controls-row">
@@ -26,7 +43,7 @@ const Player = () => {
               </svg>
               <span>Play</span>
             </button>
-            <div className="player__name">Transpotting</div>
+            <div className="player__name">{name}</div>
 
             <button type="button" className="player__full-screen">
               <svg viewBox="0 0 27 27" width="27" height="27">
@@ -41,4 +58,4 @@ const Player = () => {
   );
 };
 
-export default Player;
+Player.propTypes = FILMS_DATA_TYPES;

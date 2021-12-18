@@ -1,48 +1,68 @@
 import React from 'react';
-import Card from '../film-card.js/film-card';
-import {FILM_DATA_TYPES} from '../types';
-import {nanoid} from 'nanoid';
-import HeaderLink from '../header-link/header-link';
+import {useHistory} from 'react-router-dom';
+import {FilmsList} from '../films-list/films-list';
+import {FILMS_DATA_TYPES} from '../types';
+import {UserBlock} from '../user-block/user-block';
 
-const Main = (props) => {
-  const {title, genre, releaseYear} = props;
+export const Main = ({filmsData}) => {
+  const currentId = 1;
+  const currentFilm = filmsData.find((film) => film.id === currentId);
+  const {id, name, genre, released, posterImage} = currentFilm;
+
+  const history = useHistory();
+  const handlePlayFilm = () => {
+    history.push(`/player/${id}`);
+  };
+
+  const handleOpenFilmPage = () => {
+    history.push(`/films/${id}`);
+  };
 
   return (
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={name}/>
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header movie-card__head">
           <div className="logo">
-            <HeaderLink/>
+            <a className="logo__link">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
           </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <UserBlock/>
         </header>
-
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327" />
+              <img
+                src={posterImage}
+                alt={name}
+                width="218"
+                height="327"
+                onChange={handleOpenFilmPage}
+              />
             </div>
-
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2
+                className="movie-card__title"
+                onChange={handleOpenFilmPage}
+              >
+                {name}
+              </h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{releaseYear}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
-
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onChange={handlePlayFilm}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -97,25 +117,7 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {[
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-              <Card key={nanoid()}/>,
-            ].map((item) => item)}
-          </div>
+          <FilmsList filmsData={filmsData}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -140,6 +142,4 @@ const Main = (props) => {
   );
 };
 
-Main.propTypes = FILM_DATA_TYPES;
-
-export default Main;
+Main.propTypes = FILMS_DATA_TYPES;

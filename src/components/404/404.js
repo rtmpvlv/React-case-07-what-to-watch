@@ -1,7 +1,16 @@
 import React from 'react';
-import HeaderLink from '../header-link/header-link';
+import {useHistory} from 'react-router-dom';
+import {AppRoute} from '../../constants';
+import {Footer} from '../footer/footer';
+import {HeaderLink} from '../header-link/header-link';
 
-const PageNotFound = () => {
+export const PageNotFound = () => {
+  const history = useHistory();
+
+  const handleGoToMain = () => {
+    history.push(AppRoute.MAIN);
+  };
+
   return (
     <>
       <div className="user-page">
@@ -12,26 +21,16 @@ const PageNotFound = () => {
           <h1 className="page-title user-page__title">This page is not found.</h1>
         </header>
         <div className="sign-in user-page__content">
-          <div className="sign-in__message">
+          <div
+            className="sign-in__message"
+            onClick={handleGoToMain}
+          >
             <p>Error 404 - Page not found. </p>
-            <p> Click here to return to the main page.</p>
+            <p>Click here to return to the main page.</p>
           </div>
         </div>
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );
 };
-
-export default PageNotFound;

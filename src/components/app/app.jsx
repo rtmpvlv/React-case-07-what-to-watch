@@ -1,42 +1,46 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import PageNotFound from '../404/404';
-import FilmPage from '../film-page/film-page';
-import MyList from '../my-list/my-list';
-import Player from '../player/player';
-import ReviewPage from '../review/review';
-import SignIn from '../sign-in/sign-in';
-import Main from '../main/main';
-import {FILM_DATA_TYPES} from '../types';
+import {PageNotFound} from '../404/404';
+import {FilmPage} from '../film-page/film-page';
+import {MyList} from '../my-list/my-list';
+import {Player} from '../player/player';
+import {ReviewPage} from '../review/review';
+import {SignIn} from '../sign-in/sign-in';
+import {Main} from '../main/main';
+import {FILMS_DATA_TYPES} from '../types';
 import {AppRoute} from '../../constants';
 
-const App = (props) => {
-  const {title, genre, releaseYear} = props;
-
+export const App = ({filmsData}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <Main
-            title = {title}
-            genre = {genre}
-            releaseYear = {releaseYear}
+            filmsData = {filmsData}
           />
         </Route>
         <Route exact path={AppRoute.SIGN_IN}>
           <SignIn />
         </Route>
         <Route exact path={AppRoute.MY_LIST}>
-          <MyList />
+          <MyList
+            filmsData = {filmsData}
+          />
         </Route>
         <Route exact path={AppRoute.FILM_PAGE}>
-          <FilmPage />
+          <FilmPage
+            filmsData = {filmsData}
+          />
         </Route>
         <Route exact path={AppRoute.REVIEW}>
-          <ReviewPage />
+          <ReviewPage
+            filmsData = {filmsData}
+          />
         </Route>
         <Route exact path={AppRoute.PLAYER}>
-          <Player />
+          <Player
+            filmsData = {filmsData}
+          />
         </Route>
         <Route>
           <PageNotFound />
@@ -47,6 +51,4 @@ const App = (props) => {
   );
 };
 
-App.propTypes = FILM_DATA_TYPES;
-
-export default App;
+App.propTypes = FILMS_DATA_TYPES;
