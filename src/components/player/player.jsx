@@ -7,7 +7,7 @@ export const Player = ({filmsData}) => {
   const currentId = Number(useParams().id);
   const currentFilm = filmsData.find((film) => film.id === currentId);
 
-  const {id, name, videoLink, previewImage} = currentFilm;
+  const {id, name, previewImage, videoLink} = currentFilm;
 
   const history = useHistory();
 
@@ -18,7 +18,9 @@ export const Player = ({filmsData}) => {
   return (
     <>
       <div className="player">
-        <video src={videoLink} className="player__video" poster={previewImage}></video>
+        <video className="player__video" poster={previewImage} width="100%" heigth="100%" autoPlay>
+          <source src={videoLink}></source>
+        </video>
         <button
           type="button"
           className="player__exit"

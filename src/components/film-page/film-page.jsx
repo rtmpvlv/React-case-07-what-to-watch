@@ -21,9 +21,9 @@ export const FilmPage = ({filmsData}) => {
     history.push(`/player/${id}`);
   };
 
-  const similarFilms = filmsData.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
+  let similarFilms = filmsData.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
   if (similarFilms.length > similarListLength.MAX) {
-    similarFilms.slice(similarListLength.START, similarListLength.MAX);
+    similarFilms = similarFilms.slice(similarListLength.START, similarListLength.MAX);
   }
 
   return (
