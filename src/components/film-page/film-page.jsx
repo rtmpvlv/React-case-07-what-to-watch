@@ -5,6 +5,7 @@ import {Footer} from '../footer/footer';
 import {HeaderLink} from '../header-link/header-link';
 import {FILMS_DATA_TYPES} from '../types';
 import {UserBlock} from '../user-block/user-block';
+import {Tabs} from './nav';
 
 export const FilmPage = ({filmsData}) => {
   const similarListLength = {
@@ -14,7 +15,7 @@ export const FilmPage = ({filmsData}) => {
 
   const currentId = Number(useParams().id);
   const currentFilm = filmsData.find((film) => film.id === currentId);
-  const {id, name, posterImage, backgroundImage, description, rating, scoresCount, director, starring, genre, released} = currentFilm;
+  const {id, name, posterImage, backgroundImage, genre, released} = currentFilm;
 
   const history = useHistory();
   const handlePlayMovie = () => {
@@ -76,31 +77,7 @@ export const FilmPage = ({filmsData}) => {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">{scoresCount} ratings</span>
-                </p>
-              </div>
-              <div className="movie-card__text">
-                <p>{description}</p>
-                <p className="movie-card__director"><strong>Director: {director}</strong></p>
-                <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)}</strong></p>
-              </div>
+              <Tabs film={currentFilm}/>
             </div>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import {useParams, useHistory} from 'react-router-dom/cjs/react-router-dom.min';
 import {FILMS_DATA_TYPES} from '../types';
-
+import {Video} from '../video/video';
 
 export const Player = ({filmsData}) => {
   const currentId = Number(useParams().id);
   const currentFilm = filmsData.find((film) => film.id === currentId);
 
-  const {id, name, previewImage, videoLink} = currentFilm;
+  const {id, name} = currentFilm;
 
   const history = useHistory();
 
@@ -18,9 +18,7 @@ export const Player = ({filmsData}) => {
   return (
     <>
       <div className="player">
-        <video className="player__video" poster={previewImage} width="100%" heigth="100%" autoPlay>
-          <source src={videoLink}></source>
-        </video>
+        <Video film={currentFilm}/>
         <button
           type="button"
           className="player__exit"
