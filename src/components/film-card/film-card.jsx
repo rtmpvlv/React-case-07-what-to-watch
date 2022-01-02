@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {FILM_DATA_TYPES} from '../types';
 import {Video} from '../video/video';
@@ -8,13 +8,7 @@ export const Card = ({film}) => {
 
   const history = useHistory();
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef(null);
   let timer;
-
-  const showMovie = () => {
-    setIsPlaying(true);
-    videoRef.current.volume = 0;
-  };
 
   const handleOpenFilmCard = () => {
     history.push(`/films/${id}`);
@@ -23,7 +17,7 @@ export const Card = ({film}) => {
   };
 
   const handleMouseEnter = () => {
-    timer = setTimeout(showMovie, 1000);
+    timer = setTimeout(() => setIsPlaying(true), 1000);
   };
 
   const handleMouseLeave = () => {
@@ -42,7 +36,7 @@ export const Card = ({film}) => {
         className="small-movie-card__image"
       >
         {isPlaying ?
-          <Video film={film} forwardedRef={videoRef}/> :
+          <Video film={film} muted={true}/> :
           <img src={posterImage} alt={name} width="280" height="175"/>}
       </div>
       <h3 className="small-movie-card__title">
