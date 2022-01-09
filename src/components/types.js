@@ -27,3 +27,8 @@ export const FILMS_DATA_TYPES = {
 export const FILM_DATA_TYPES = {
   film: filmDataType
 };
+
+export const GENRES_LIST_TYPES = {
+  selectedGenre: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
+};

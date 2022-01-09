@@ -6,7 +6,7 @@ import {MyList} from '../my-list/my-list';
 import {Player} from '../player/player';
 import {ReviewPage} from '../review/review';
 import {SignIn} from '../sign-in/sign-in';
-import {Main} from '../main/main';
+import {MainWrapped} from '../main/main';
 import {FILMS_DATA_TYPES} from '../types';
 import {AppRoute} from '../../constants';
 
@@ -15,7 +15,7 @@ export const App = ({filmsData}) => {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
-          <Main
+          <MainWrapped
             filmsData = {filmsData}
           />
         </Route>

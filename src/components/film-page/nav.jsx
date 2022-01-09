@@ -38,15 +38,11 @@ export const Tabs = ({film}) => {
           className="movie-nav__list"
           onClick={handleTabsChange}
         >
-          <li className={state === ActiveTab.OVERVIEW ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
-            <a className="movie-nav__link">{ActiveTab.OVERVIEW}</a>
-          </li>
-          <li className={state === ActiveTab.DETAILS ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
-            <a className="movie-nav__link">{ActiveTab.DETAILS}</a>
-          </li>
-          <li className={state === ActiveTab.REVIEWS ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
-            <a className="movie-nav__link">{ActiveTab.REVIEWS}</a>
-          </li>
+          {Object.values(ActiveTab).map((item) => (
+            <li key={item} className={state === item ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
+              <a className="movie-nav__link">{item}</a>
+            </li>
+          ))}
         </ul>
       </nav>
       {getCurrentTab()}

@@ -3,11 +3,19 @@ import {useHistory} from 'react-router-dom';
 import {FilmsList} from '../films-list/films-list';
 import {FILMS_DATA_TYPES} from '../types';
 import {UserBlock} from '../user-block/user-block';
+import GenresList from './genres-list';
+import withMainPage from './hocs/with-main-page.js';
+import {sortedFilms} from '../../utils';
+import {Genres} from '../../constants';
 
-export const Main = ({filmsData}) => {
-  const currentId = 1;
-  const currentFilm = filmsData.find((film) => film.id === currentId);
-  const {id, name, genre, released, posterImage} = currentFilm;
+export const Main = ({filmsData, onGenreChange, selectedGenre}) => {
+  const posterFilm = filmsData[0];
+  const {id, name, genre, released, posterImage} = posterFilm;
+
+  const availableGenres = Array.from(new Set(filmsData.map((point) => point.genre)));
+  availableGenres.unshift(Genres.ALL_GENRES);
+
+  const films = sortedFilms[selectedGenre](filmsData);
 
   const history = useHistory();
   const handlePlayFilm = () => {
@@ -83,42 +91,12 @@ export const Main = ({filmsData}) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <FilmsList filmsData={filmsData}/>
-
+          <GenresList
+            availableGenres={availableGenres}
+            selectedGenre={selectedGenre}
+            onGenreChange={onGenreChange}
+          />
+          <FilmsList filmsData={films}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -143,3 +121,5 @@ export const Main = ({filmsData}) => {
 };
 
 Main.propTypes = FILMS_DATA_TYPES;
+
+export const MainWrapped = withMainPage(Main);
