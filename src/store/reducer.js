@@ -1,14 +1,9 @@
-// import {films} from '../mocks/films';
-// import {adaptFilmToClient} from '../adapter';
 import {Genres} from '../constants';
 import {ActionType} from './action';
-// import {sortedFilms} from '../utils';
-
-// const filmsData = films.map((film) => adaptFilmToClient(film));
 
 const initialState = {
   selectedGenre: Genres.ALL_GENRES,
-  // filmsData,
+  filmsRendered: 8,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -17,7 +12,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectedGenre: action.payload,
-        // filmsData: sortedFilms[Genres[action.payload]](filmsData),
+      };
+    }
+    case ActionType.INCREASE_FILMS_QUANTITY: {
+      return {
+        ...state,
+        filmsRendered: action.payload,
       };
     }
     default: return state;

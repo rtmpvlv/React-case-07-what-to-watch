@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {FilmsList} from '../films-list/films-list';
 import {FILMS_DATA_TYPES} from '../types';
@@ -6,9 +6,12 @@ import {UserBlock} from '../user-block/user-block';
 import GenresList from './genres-list';
 import withMainPage from './hocs/with-main-page.js';
 import {sortedFilms} from '../../utils';
-import {Genres} from '../../constants';
+import {Genres, FILMS_PER_CLICK} from '../../constants';
+import ShowMoreButton from './show-more-button';
 
-export const Main = ({filmsData, onGenreChange, selectedGenre}) => {
+
+export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
+
   const posterFilm = filmsData[0];
   const {id, name, genre, released, posterImage} = posterFilm;
 
@@ -18,6 +21,7 @@ export const Main = ({filmsData, onGenreChange, selectedGenre}) => {
   const films = sortedFilms[selectedGenre](filmsData);
 
   const history = useHistory();
+
   const handlePlayFilm = () => {
     history.push(`/player/${id}`);
   };
@@ -25,6 +29,10 @@ export const Main = ({filmsData, onGenreChange, selectedGenre}) => {
   const handleOpenFilmPage = () => {
     history.push(`/films/${id}`);
   };
+
+  useEffect(() => {
+    increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
+  }, []);
 
   return (
     <>
@@ -96,10 +104,15 @@ export const Main = ({filmsData, onGenreChange, selectedGenre}) => {
             selectedGenre={selectedGenre}
             onGenreChange={onGenreChange}
           />
-          <FilmsList filmsData={films}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmsList
+            filmsData={films}
+            filmsRendered={filmsRendered}
+          />
+          {films.length > filmsRendered &&
+          <ShowMoreButton
+            filmsRendered={filmsRendered}
+            increaseRenderedFilmsQuantity={increaseRenderedFilmsQuantity}
+          />}
         </section>
 
         <footer className="page-footer">

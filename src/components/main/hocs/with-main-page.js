@@ -4,7 +4,7 @@ import {ActionCreator} from '../../../store/action';
 function mapStateToProps(state) {
   return {
     selectedGenre: state.selectedGenre,
-    // filmsData: state.filmsData,
+    filmsRendered: state.filmsRendered,
   };
 }
 
@@ -13,6 +13,10 @@ function mapDispatchToProps(dispatch) {
     onGenreChange(item) {
       dispatch(ActionCreator.changeGenre(item));
     },
+    increaseRenderedFilmsQuantity(number) {
+      dispatch(ActionCreator.increaseQuantity(number));
+    },
+
   };
 }
 

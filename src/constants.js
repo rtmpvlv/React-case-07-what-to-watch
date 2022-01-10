@@ -19,3 +19,5 @@ export const Genres = {
   SCI_FI: `Sci-fi`,
   THRILLERS: `Thrillers`,
 };
+
+export const FILMS_PER_CLICK = 8;

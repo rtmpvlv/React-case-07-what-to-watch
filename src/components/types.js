@@ -32,3 +32,8 @@ export const GENRES_LIST_TYPES = {
   selectedGenre: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
 };
+
+export const SHOWMOREBUTTON_TYPES = {
+  filmsRendered: PropTypes.number.isRequired,
+  increaseRenderedFilmsQuantity: PropTypes.func.isRequired,
+};
