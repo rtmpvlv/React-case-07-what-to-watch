@@ -8,14 +8,11 @@ import {UserBlock} from '../user-block/user-block';
 import {Tabs} from './nav';
 
 export const FilmPage = ({filmsData}) => {
-  const similarListLength = {
-    START: 0,
-    MAX: 4,
-  };
+  const SIMILAR_LIST_LENGTH = 4;
 
   const currentId = Number(useParams().id);
   const currentFilm = filmsData.find((film) => film.id === currentId);
-  const {id, name, posterImage, backgroundImage, genre, released} = currentFilm;
+  const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
 
   const history = useHistory();
   const handlePlayMovie = () => {
@@ -23,13 +20,12 @@ export const FilmPage = ({filmsData}) => {
   };
 
   let similarFilms = filmsData.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
-  if (similarFilms.length > similarListLength.MAX) {
-    similarFilms = similarFilms.slice(similarListLength.START, similarListLength.MAX);
-  }
 
   return (
     <>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{
+        backgroundColor
+      }}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name} />
@@ -85,7 +81,7 @@ export const FilmPage = ({filmsData}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList filmsData={similarFilms}/>
+          <FilmsList filmsData={similarFilms} filmsRendered={SIMILAR_LIST_LENGTH}/>
         </section>
         <Footer/>
       </div>

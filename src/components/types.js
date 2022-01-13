@@ -20,6 +20,23 @@ const filmDataType = PropTypes.shape({
   isFavorite: PropTypes.bool.isRequired,
 });
 
+export const APP_TYPES = {
+  filmsData: PropTypes.arrayOf(filmDataType).isRequired,
+  promo: filmDataType,
+  isDataLoaded: PropTypes.bool.isRequired,
+  isPromoLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
+};
+
+export const MAIN_TYPES = {
+  filmsData: PropTypes.arrayOf(filmDataType).isRequired,
+  promo: filmDataType,
+  onGenreChange: PropTypes.func.isRequired,
+  selectedGenre: PropTypes.string.isRequired,
+  filmsRendered: PropTypes.number.isRequired,
+  increaseRenderedFilmsQuantity: PropTypes.func.isRequired,
+};
+
 export const FILMS_DATA_TYPES = {
   filmsData: PropTypes.arrayOf(filmDataType).isRequired,
 };

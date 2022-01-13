@@ -17,7 +17,19 @@ export const Genres = {
   KIDS_AND_FAMILY: `Kids and Family`,
   ROMANCE: `Romance`,
   SCI_FI: `Sci-fi`,
-  THRILLERS: `Thrillers`,
+  THRILLERS: `Thriller`,
+  FANTASY: `Fantasy`,
 };
 
 export const FILMS_PER_CLICK = 8;
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const ApiRequestURLs = {
+  FILMS: `/films`,
+  LOGIN: `/login`,
+  PROMO_FILM: `/films/promo`
+};

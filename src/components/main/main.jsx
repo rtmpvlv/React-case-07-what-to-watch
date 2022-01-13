@@ -1,24 +1,32 @@
 import React, {useEffect} from 'react';
+import {connect} from "react-redux";
 import {useHistory} from 'react-router-dom';
-import {FilmsList} from '../films-list/films-list';
-import {FILMS_DATA_TYPES} from '../types';
+
 import {UserBlock} from '../user-block/user-block';
+import {FilmsList} from '../films-list/films-list';
 import GenresList from './genres-list';
-import withMainPage from './hocs/with-main-page.js';
-import {sortedFilms} from '../../utils';
-import {Genres, FILMS_PER_CLICK} from '../../constants';
 import ShowMoreButton from './show-more-button';
 
+import {Genres, FILMS_PER_CLICK} from '../../constants';
+import {MAIN_TYPES} from '../types';
 
-export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
+import {ActionCreator} from '../../store/action';
 
-  const posterFilm = filmsData[0];
-  const {id, name, genre, released, posterImage} = posterFilm;
+export const Main = ({filmsData, promo, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
+  const {id, name, genre, released, posterImage, backgroundImage} = promo;
+
+  /* film sort section */
 
   const availableGenres = Array.from(new Set(filmsData.map((point) => point.genre)));
   availableGenres.unshift(Genres.ALL_GENRES);
+  const getFilms = () => {
+    if (selectedGenre === Genres.ALL_GENRES) {
+      return filmsData;
+    }
+    return filmsData.filter((item) => item.genre === selectedGenre);
+  };
 
-  const films = sortedFilms[selectedGenre](filmsData);
+  /* redirect section */
 
   const history = useHistory();
 
@@ -31,14 +39,14 @@ export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, in
   };
 
   useEffect(() => {
-    increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
+    return increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
   }, []);
 
   return (
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={name}/>
+          <img src={backgroundImage} alt={name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -95,7 +103,6 @@ export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, in
           </div>
         </div>
       </section>
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -105,10 +112,10 @@ export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, in
             onGenreChange={onGenreChange}
           />
           <FilmsList
-            filmsData={films}
+            filmsData={getFilms()}
             filmsRendered={filmsRendered}
           />
-          {films.length > filmsRendered &&
+          {getFilms().length > filmsRendered &&
           <ShowMoreButton
             filmsRendered={filmsRendered}
             increaseRenderedFilmsQuantity={increaseRenderedFilmsQuantity}
@@ -133,6 +140,24 @@ export const Main = ({filmsData, onGenreChange, selectedGenre, filmsRendered, in
   );
 };
 
-Main.propTypes = FILMS_DATA_TYPES;
+Main.propTypes = MAIN_TYPES;
 
-export const MainWrapped = withMainPage(Main);
+const mapStateToProps = (state) => {
+  return {
+    selectedGenre: state.selectedGenre,
+    filmsRendered: state.filmsRendered,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGenreChange(item) {
+      dispatch(ActionCreator.changeGenre(item));
+    },
+    increaseRenderedFilmsQuantity(number) {
+      dispatch(ActionCreator.increaseQuantity(number));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
