@@ -12,25 +12,23 @@ export const PageNotFound = () => {
   };
 
   return (
-    <>
-      <div className="user-page">
-        <header className="page-header user-page__head">
-          <div className="logo">
-            <HeaderLink/>
-          </div>
-          <h1 className="page-title user-page__title">This page is not found.</h1>
-        </header>
-        <div className="sign-in user-page__content">
-          <div
-            className="sign-in__message"
-            onClick={handleGoToMain}
-          >
-            <p>Error 404 - Page not found. </p>
-            <p>Click here to return to the main page.</p>
-          </div>
+    <div className="user-page">
+      <header className="page-header user-page__head">
+        <div className="logo">
+          <HeaderLink/>
         </div>
-        <Footer/>
+        <h1 className="page-title user-page__title">This page is not found.</h1>
+      </header>
+      <div className="sign-in user-page__content">
+        <div
+          className="sign-in__message"
+          onClick={handleGoToMain}
+        >
+          <p>Error 404 - Page not found. </p>
+          <p>Click here to return to the main page.</p>
+        </div>
       </div>
-    </>
+      <Footer/>
+    </div>
   );
 };

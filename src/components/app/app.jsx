@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-
 import {PageNotFound} from '../404/404';
 import {FilmPage} from '../film-page/film-page';
 import {MyList} from '../my-list/my-list';
@@ -11,10 +10,8 @@ import {SignIn} from '../sign-in/sign-in';
 import Main from '../main/main';
 import {MoonLoader} from 'react-spinners';
 import {css} from "@emotion/react";
-
 import {APP_TYPES} from '../types';
 import {AppRoute} from '../../constants';
-
 import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
 
 const override = css`
@@ -43,42 +40,15 @@ export const App = ({filmsData, promo, isDataLoaded, isPromoLoaded, onLoadData})
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <Main
-            filmsData = {filmsData}
-            promo={promo}
-          />
-        </Route>
-        <Route exact path={AppRoute.SIGN_IN}>
-          <SignIn />
-        </Route>
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyList
-            filmsData = {filmsData}
-          />
-        </Route>
-        <Route exact path={AppRoute.FILM_PAGE}>
-          <FilmPage
-            filmsData = {filmsData}
-          />
-        </Route>
-        <Route exact path={AppRoute.REVIEW}>
-          <ReviewPage
-            filmsData = {filmsData}
-          />
-        </Route>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player
-            filmsData = {filmsData}
-          />
-        </Route>
-        <Route>
-          <PageNotFound />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={AppRoute.MAIN} render={() => <Main filmsData={filmsData} promo={promo}/>} />
+      <Route exact path={AppRoute.SIGN_IN} render={() => <SignIn />} />
+      <Route exact path={AppRoute.MY_LIST} render={() => <MyList filmsData={filmsData}/>} />
+      <Route exact path={AppRoute.FILM_PAGE} render={() => <FilmPage filmsData={filmsData}/>} />
+      <Route exact path={AppRoute.REVIEW} render={() => <ReviewPage filmsData={filmsData}/>} />
+      <Route exact path={AppRoute.PLAYER} render={() => <Player filmsData={filmsData}/>} />
+      <Route render={() => <PageNotFound />} />
+    </Switch>
   );
 };
 

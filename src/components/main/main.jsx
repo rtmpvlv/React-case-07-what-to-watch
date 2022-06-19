@@ -1,21 +1,16 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {useHistory} from 'react-router-dom';
-
 import {UserBlock} from '../user-block/user-block';
 import {FilmsList} from '../films-list/films-list';
 import GenresList from './genres-list';
 import ShowMoreButton from './show-more-button';
-
 import {Genres, FILMS_PER_CLICK} from '../../constants';
 import {MAIN_TYPES} from '../types';
-
 import {ActionCreator} from '../../store/action';
 
 export const Main = ({filmsData, promo, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
   const {id, name, genre, released, posterImage, backgroundImage} = promo;
-
-  /* film sort section */
 
   const availableGenres = Array.from(new Set(filmsData.map((point) => point.genre)));
   availableGenres.unshift(Genres.ALL_GENRES);
@@ -25,8 +20,6 @@ export const Main = ({filmsData, promo, onGenreChange, selectedGenre, filmsRende
     }
     return filmsData.filter((item) => item.genre === selectedGenre);
   };
-
-  /* redirect section */
 
   const history = useHistory();
 

@@ -7,9 +7,9 @@ import {FILMS_DATA_TYPES} from '../types';
 import {UserBlock} from '../user-block/user-block';
 import {Tabs} from './nav';
 
-export const FilmPage = ({filmsData}) => {
-  const SIMILAR_LIST_LENGTH = 4;
+const SIMILAR_LIST_LENGTH = 4;
 
+export const FilmPage = ({filmsData}) => {
   const currentId = Number(useParams().id);
   const currentFilm = filmsData.find((film) => film.id === currentId);
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
