@@ -9,9 +9,9 @@ import {Tabs} from './nav';
 
 const SIMILAR_LIST_LENGTH = 4;
 
-export const FilmPage = ({filmsData}) => {
+export const FilmPage = ({films}) => {
   const currentId = Number(useParams().id);
-  const currentFilm = filmsData.find((film) => film.id === currentId);
+  const currentFilm = films.find((film) => film.id === currentId);
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
 
   const history = useHistory();
@@ -19,7 +19,7 @@ export const FilmPage = ({filmsData}) => {
     history.push(`/player/${id}`);
   };
 
-  let similarFilms = filmsData.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
+  let similarFilms = films.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
 
   return (
     <>

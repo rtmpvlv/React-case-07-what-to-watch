@@ -21,7 +21,7 @@ const filmDataType = PropTypes.shape({
 });
 
 export const APP_TYPES = {
-  filmsData: PropTypes.arrayOf(filmDataType).isRequired,
+  films: PropTypes.arrayOf(filmDataType).isRequired,
   promo: filmDataType,
   isDataLoaded: PropTypes.bool.isRequired,
   isPromoLoaded: PropTypes.bool.isRequired,
@@ -29,7 +29,7 @@ export const APP_TYPES = {
 };
 
 export const MAIN_TYPES = {
-  filmsData: PropTypes.arrayOf(filmDataType).isRequired,
+  films: PropTypes.arrayOf(filmDataType).isRequired,
   promo: filmDataType,
   onGenreChange: PropTypes.func.isRequired,
   selectedGenre: PropTypes.string.isRequired,
@@ -38,7 +38,7 @@ export const MAIN_TYPES = {
 };
 
 export const FILMS_DATA_TYPES = {
-  filmsData: PropTypes.arrayOf(filmDataType).isRequired,
+  films: PropTypes.arrayOf(filmDataType).isRequired,
 };
 
 export const FILM_DATA_TYPES = {

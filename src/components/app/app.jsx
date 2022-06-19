@@ -19,7 +19,7 @@ const override = css`
   margin: auto;
 `;
 
-export const App = ({filmsData, promo, isDataLoaded, isPromoLoaded, onLoadData}) => {
+export const App = ({films, isDataLoaded, isPromoLoaded, onLoadData}) => {
   useEffect(() => {
     if (!isDataLoaded || !isPromoLoaded) {
       onLoadData();
@@ -41,12 +41,12 @@ export const App = ({filmsData, promo, isDataLoaded, isPromoLoaded, onLoadData})
 
   return (
     <Switch>
-      <Route exact path={AppRoute.MAIN} render={() => <Main filmsData={filmsData} promo={promo}/>} />
+      <Route exact path={AppRoute.MAIN} render={() => <Main />} />
       <Route exact path={AppRoute.SIGN_IN} render={() => <SignIn />} />
-      <Route exact path={AppRoute.MY_LIST} render={() => <MyList filmsData={filmsData}/>} />
-      <Route exact path={AppRoute.FILM_PAGE} render={() => <FilmPage filmsData={filmsData}/>} />
-      <Route exact path={AppRoute.REVIEW} render={() => <ReviewPage filmsData={filmsData}/>} />
-      <Route exact path={AppRoute.PLAYER} render={() => <Player filmsData={filmsData}/>} />
+      <Route exact path={AppRoute.MY_LIST} render={() => <MyList films={films}/>} />
+      <Route exact path={AppRoute.FILM_PAGE} render={() => <FilmPage films={films}/>} />
+      <Route exact path={AppRoute.REVIEW} render={() => <ReviewPage films={films}/>} />
+      <Route exact path={AppRoute.PLAYER} render={() => <Player films={films}/>} />
       <Route render={() => <PageNotFound />} />
     </Switch>
   );
@@ -56,8 +56,7 @@ App.propTypes = APP_TYPES;
 
 const mapStateToProps = (state) => {
   return {
-    filmsData: state.films,
-    promo: state.promo,
+    films: state.films,
     isDataLoaded: state.isDataLoaded,
     isPromoLoaded: state.isPromoLoaded,
   };

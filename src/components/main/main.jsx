@@ -9,16 +9,20 @@ import {Genres, FILMS_PER_CLICK} from '../../constants';
 import {MAIN_TYPES} from '../types';
 import {ActionCreator} from '../../store/action';
 
-export const Main = ({filmsData, promo, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
-  const {id, name, genre, released, posterImage, backgroundImage} = promo;
+export const Main = ({films, promoFilm, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
+  const {id, name, genre, released, posterImage, backgroundImage} = promoFilm;
 
-  const availableGenres = Array.from(new Set(filmsData.map((point) => point.genre)));
-  availableGenres.unshift(Genres.ALL_GENRES);
+  const getAvailableGenres = () => {
+    const availableGenres = Array.from(new Set(films.map((film) => film.genre)));
+    availableGenres.unshift(Genres.ALL_GENRES);
+    return availableGenres;
+  };
+
   const getFilms = () => {
     if (selectedGenre === Genres.ALL_GENRES) {
-      return filmsData;
+      return films;
     }
-    return filmsData.filter((item) => item.genre === selectedGenre);
+    return films.filter((film) => film.genre === selectedGenre);
   };
 
   const history = useHistory();
@@ -100,12 +104,12 @@ export const Main = ({filmsData, promo, onGenreChange, selectedGenre, filmsRende
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList
-            availableGenres={availableGenres}
+            availableGenres={getAvailableGenres()}
             selectedGenre={selectedGenre}
             onGenreChange={onGenreChange}
           />
           <FilmsList
-            filmsData={getFilms()}
+            films={getFilms()}
             filmsRendered={filmsRendered}
           />
           {getFilms().length > filmsRendered &&
@@ -137,6 +141,8 @@ Main.propTypes = MAIN_TYPES;
 
 const mapStateToProps = (state) => {
   return {
+    films: state.films,
+    promoFilm: state.promo,
     selectedGenre: state.selectedGenre,
     filmsRendered: state.filmsRendered,
   };

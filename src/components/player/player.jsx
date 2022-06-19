@@ -3,9 +3,9 @@ import {useParams, useHistory} from 'react-router-dom/cjs/react-router-dom.min';
 import {FILMS_DATA_TYPES} from '../types';
 import {Video} from '../video/video';
 
-export const Player = ({filmsData}) => {
+export const Player = ({films}) => {
   const currentId = Number(useParams().id);
-  const currentFilm = filmsData.find((film) => film.id === currentId);
+  const currentFilm = films.find((film) => film.id === currentId);
 
   const {id, name} = currentFilm;
 
