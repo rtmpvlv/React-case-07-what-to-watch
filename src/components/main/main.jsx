@@ -9,8 +9,14 @@ import {Genres, FILMS_PER_CLICK} from '../../constants';
 import {MAIN_TYPES} from '../types';
 import {ActionCreator} from '../../store/action';
 
-export const Main = ({films, promoFilm, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity}) => {
+export const Main = (props) => {
+  const {films, promoFilm, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity} = props;
   const {id, name, genre, released, posterImage, backgroundImage} = promoFilm;
+  const history = useHistory();
+
+  useEffect(() => {
+    return increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
+  }, []);
 
   const getAvailableGenres = () => {
     const availableGenres = Array.from(new Set(films.map((film) => film.genre)));
@@ -25,8 +31,6 @@ export const Main = ({films, promoFilm, onGenreChange, selectedGenre, filmsRende
     return films.filter((film) => film.genre === selectedGenre);
   };
 
-  const history = useHistory();
-
   const handlePlayFilm = () => {
     history.push(`/player/${id}`);
   };
@@ -34,10 +38,6 @@ export const Main = ({films, promoFilm, onGenreChange, selectedGenre, filmsRende
   const handleOpenFilmPage = () => {
     history.push(`/films/${id}`);
   };
-
-  useEffect(() => {
-    return increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
-  }, []);
 
   return (
     <>

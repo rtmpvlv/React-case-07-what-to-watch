@@ -9,17 +9,19 @@ import {Tabs} from './nav';
 
 const SIMILAR_LIST_LENGTH = 4;
 
-export const FilmPage = ({films}) => {
+export const FilmPage = (props) => {
+  const {films} = props;
   const currentId = Number(useParams().id);
   const currentFilm = films.find((film) => film.id === currentId);
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
 
   const history = useHistory();
+
   const handlePlayMovie = () => {
     history.push(`/player/${id}`);
   };
 
-  let similarFilms = films.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
+  const similarFilms = films.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
 
   return (
     <>
@@ -81,7 +83,7 @@ export const FilmPage = ({films}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList filmsData={similarFilms} filmsRendered={SIMILAR_LIST_LENGTH}/>
+          <FilmsList films={similarFilms} filmsRendered={SIMILAR_LIST_LENGTH}/>
         </section>
         <Footer/>
       </div>

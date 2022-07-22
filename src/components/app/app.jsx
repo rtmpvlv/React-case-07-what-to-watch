@@ -29,7 +29,8 @@ export const App = ({films, isDataLoaded, isPromoLoaded, onLoadData}) => {
   if (!isDataLoaded || !isPromoLoaded) {
     return (
       <div style={{
-        minHeight: `640px`,
+        width: `100vh`,
+        height: `100vh`,
         display: `flex`,
         justifyContent: `center`,
         alignItems: `center`,
