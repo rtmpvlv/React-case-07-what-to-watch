@@ -9,10 +9,11 @@ export const ReviewPage = ({films}) => {
   const currentId = Number(useParams().id);
   const currentFilm = films.find((film) => film.id === currentId);
 
-  const {id, name, posterImage, backgroundImage} = currentFilm;
-
+  const {id, name, posterImage, backgroundImage, backgroundColor} = currentFilm;
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={{
+      backgroundColor,
+    }}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
           <img src={backgroundImage} alt={name} />
@@ -39,7 +40,7 @@ export const ReviewPage = ({films}) => {
         </div>
       </div>
       <div className="add-review">
-        <ReviewForm/>
+        <ReviewForm backgroundColor={backgroundColor} />
       </div>
     </section>
   );

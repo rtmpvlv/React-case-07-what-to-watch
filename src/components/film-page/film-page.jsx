@@ -1,5 +1,5 @@
 import React from 'react';
-import {useParams, useHistory, Link} from 'react-router-dom/cjs/react-router-dom.min';
+import {useParams, useHistory, Link} from 'react-router-dom';
 import {FilmsList} from '../films-list/films-list';
 import {Footer} from '../footer/footer';
 import {HeaderLink} from '../header-link/header-link';

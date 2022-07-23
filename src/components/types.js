@@ -54,3 +54,7 @@ export const SHOWMOREBUTTON_TYPES = {
   filmsRendered: PropTypes.number.isRequired,
   increaseRenderedFilmsQuantity: PropTypes.func.isRequired,
 };
+
+export const REVIEW_FORM_TYPES = {
+  backgroundColor: PropTypes.string.isRequired,
+};
