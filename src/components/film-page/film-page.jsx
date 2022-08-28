@@ -5,21 +5,19 @@ import {Footer} from '../footer/footer';
 import {HeaderLink} from '../header-link/header-link';
 import {FILMS_DATA_TYPES} from '../types';
 import {UserBlock} from '../user-block/user-block';
-import {Tabs} from './nav';
+import {Tabs} from './tabs';
 
 const SIMILAR_LIST_LENGTH = 4;
 
-export const FilmPage = (props) => {
-  const {films} = props;
+export const FilmPage = ({films}) => {
   const currentId = Number(useParams().id);
-  const currentFilm = films.find((film) => film.id === currentId);
-  const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
-
   const history = useHistory();
 
-  const handlePlayMovie = () => {
-    history.push(`/player/${id}`);
-  };
+  const currentFilm = films.find((film) => film.id === currentId);
+
+  const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = currentFilm;
+
+  const handlePlayMovie = () => history.push(`/player/${id}`);
 
   const similarFilms = films.filter((film) => currentFilm !== film && currentFilm.genre === film.genre);
 

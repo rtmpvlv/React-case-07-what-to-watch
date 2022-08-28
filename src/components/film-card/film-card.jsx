@@ -11,9 +11,9 @@ export const Card = ({film}) => {
   let timer;
 
   const handleOpenFilmCard = () => {
-    history.push(`/films/${id}`);
-    setIsPlaying(false);
     clearTimeout(timer);
+    setIsPlaying(false);
+    history.push(`/films/${id}`);
   };
 
   const handleMouseEnter = () => {
@@ -21,8 +21,8 @@ export const Card = ({film}) => {
   };
 
   const handleMouseLeave = () => {
-    setIsPlaying(false);
     clearTimeout(timer);
+    setIsPlaying(false);
   };
 
   return (
@@ -34,7 +34,7 @@ export const Card = ({film}) => {
     >
       <div className="small-movie-card__image">
         {isPlaying ? (
-          <Video film={film} muted={true} />
+          <Video film={film} muted />
         ) : (
           <img src={posterImage} alt={name} width="280" height="175" />
         )}
