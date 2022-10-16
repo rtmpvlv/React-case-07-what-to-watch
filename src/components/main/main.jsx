@@ -18,17 +18,11 @@ export const Main = (props) => {
     return increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
   }, []);
 
-  const getAvailableGenres = () => {
-    const availableGenres = Array.from(new Set(films.map((film) => film.genre)));
-    availableGenres.unshift(Genres.ALL_GENRES);
-    return availableGenres;
-  };
-
   const getFilms = () => {
-    if (selectedGenre === Genres.ALL_GENRES) {
-      return films;
+    if (selectedGenre !== Genres.ALL_GENRES) {
+      return films.filter((film) => film.genre === selectedGenre);
     }
-    return films.filter((film) => film.genre === selectedGenre);
+    return films;
   };
 
   const handlePlayFilm = () => {
@@ -104,7 +98,7 @@ export const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList
-            availableGenres={getAvailableGenres()}
+            films={films}
             selectedGenre={selectedGenre}
             onGenreChange={onGenreChange}
           />

@@ -1,30 +1,13 @@
 import {Genres, AuthorizationStatus} from '../constants';
 import {ActionType} from './action';
 import {adaptFilmToClient} from '../adapter';
+import {FILMS_PER_CLICK} from '../constants';
 
 const initialState = {
   films: [],
-  promo: {
-    id: 0,
-    name: ``,
-    posterImage: ``,
-    previewImage: ``,
-    backgroundImage: ``,
-    backgroundColor: ``,
-    videoLink: ``,
-    previewVideoLink: ``,
-    description: ``,
-    rating: 0,
-    scoresCount: 0,
-    director: ``,
-    starring: [],
-    runTime: 0,
-    genre: ``,
-    released: 0,
-    isFavorite: false,
-  },
+  promo: {},
   selectedGenre: Genres.ALL_GENRES,
-  filmsRendered: 8,
+  filmsRendered: FILMS_PER_CLICK,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   isPromoLoaded: false,
