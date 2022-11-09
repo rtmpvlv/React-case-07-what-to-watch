@@ -1,21 +1,28 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {useHistory} from 'react-router-dom';
-import {UserBlock} from '../user-block/user-block';
-import {FilmsList} from '../films-list/films-list';
-import GenresList from './genres-list';
-import ShowMoreButton from './show-more-button';
-import {Genres, FILMS_PER_CLICK} from '../../constants';
-import {MAIN_TYPES} from '../types';
-import {ActionCreator} from '../../store/action';
+import {useHistory} from "react-router-dom";
+import {UserBlock} from "../user-block/user-block";
+import {FilmsList} from "../films-list/films-list";
+import GenresList from "./genres-list";
+import ShowMoreButton from "./show-more-button";
+import {Genres, FILMS_PER_CLICK} from "../../constants";
+import {MAIN_TYPES} from "../types";
+import {ActionCreator} from "../../store/action";
 
 export const Main = (props) => {
-  const {films, promoFilm, onGenreChange, selectedGenre, filmsRendered, increaseRenderedFilmsQuantity} = props;
+  const {
+    films,
+    promoFilm,
+    onGenreChange,
+    selectedGenre,
+    filmsRendered,
+    showMoreFilms,
+  } = props;
   const {id, name, genre, released, posterImage, backgroundImage} = promoFilm;
   const history = useHistory();
 
   useEffect(() => {
-    return increaseRenderedFilmsQuantity(FILMS_PER_CLICK);
+    return showMoreFilms(FILMS_PER_CLICK);
   }, []);
 
   const getFilms = () => {
@@ -37,7 +44,7 @@ export const Main = (props) => {
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={backgroundImage} alt={name}/>
+          <img src={backgroundImage} alt={name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header movie-card__head">
@@ -48,7 +55,7 @@ export const Main = (props) => {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-          <UserBlock/>
+          <UserBlock />
         </header>
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -62,10 +69,7 @@ export const Main = (props) => {
               />
             </div>
             <div className="movie-card__desc">
-              <h2
-                className="movie-card__title"
-                onClick={handleOpenFilmPage}
-              >
+              <h2 className="movie-card__title" onClick={handleOpenFilmPage}>
                 {name}
               </h2>
               <p className="movie-card__meta">
@@ -83,7 +87,10 @@ export const Main = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -102,15 +109,13 @@ export const Main = (props) => {
             selectedGenre={selectedGenre}
             onGenreChange={onGenreChange}
           />
-          <FilmsList
-            films={getFilms()}
-            filmsRendered={filmsRendered}
-          />
-          {getFilms().length > filmsRendered &&
-          <ShowMoreButton
-            filmsRendered={filmsRendered}
-            increaseRenderedFilmsQuantity={increaseRenderedFilmsQuantity}
-          />}
+          <FilmsList films={getFilms()} filmsRendered={filmsRendered} />
+          {getFilms().length > filmsRendered && (
+            <ShowMoreButton
+              filmsRendered={filmsRendered}
+              showMoreFilms={showMoreFilms}
+            />
+          )}
         </section>
 
         <footer className="page-footer">
@@ -147,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
     onGenreChange(item) {
       dispatch(ActionCreator.changeGenre(item));
     },
-    increaseRenderedFilmsQuantity(number) {
+    showMoreFilms(number) {
       dispatch(ActionCreator.increaseQuantity(number));
     },
   };

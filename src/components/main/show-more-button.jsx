@@ -1,12 +1,10 @@
-import React from 'react';
-import {SHOWMOREBUTTON_TYPES} from '../types';
-import {FILMS_PER_CLICK} from '../../constants';
+import React from "react";
+import {SHOWMOREBUTTON_TYPES} from "../types";
+import {FILMS_PER_CLICK} from "../../constants";
 
-
-const ShowMoreButton = ({filmsRendered, increaseRenderedFilmsQuantity}) => {
-
+const ShowMoreButton = ({filmsRendered, showMoreFilms}) => {
   const handleFilmsRender = () => {
-    increaseRenderedFilmsQuantity(filmsRendered + FILMS_PER_CLICK);
+    showMoreFilms(filmsRendered + FILMS_PER_CLICK);
   };
 
   return (
@@ -14,7 +12,8 @@ const ShowMoreButton = ({filmsRendered, increaseRenderedFilmsQuantity}) => {
       <button
         className="catalog__button"
         type="button"
-        onClick={handleFilmsRender}>
+        onClick={handleFilmsRender}
+      >
         Show more
       </button>
     </div>

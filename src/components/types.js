@@ -52,7 +52,7 @@ export const GENRES_LIST_TYPES = {
 
 export const SHOWMOREBUTTON_TYPES = {
   filmsRendered: PropTypes.number.isRequired,
-  increaseRenderedFilmsQuantity: PropTypes.func.isRequired,
+  showFilms: PropTypes.func.isRequired,
 };
 
 export const REVIEW_FORM_TYPES = {
