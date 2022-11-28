@@ -3,7 +3,8 @@ export const ActionType = {
   PROMO_FILMS_LOAD: `@promo/Load`,
   CHANGE_GENRE: `@genre/changeGenre`,
   INCREASE_FILMS_QUANTITY: `@films/increaseQuantity`,
-  REQUIRED_AUTHORIZATION: `@user/requiredAuthorization`,
+  CHANGE_AUTHORIZATION_STATUS: `@user/changeAuthorizationStatus`,
+  UPDATE_USER_DATA: `@user/updateUserData`,
 };
 
 export const ActionCreator = {
@@ -23,8 +24,12 @@ export const ActionCreator = {
     type: ActionType.INCREASE_FILMS_QUANTITY,
     payload: number,
   }),
-  requiredAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
+  changeAuthorizationStatus: (status) => ({
+    type: ActionType.CHANGE_AUTHORIZATION_STATUS,
     payload: status,
+  }),
+  updateUserData: (data) => ({
+    type: ActionType.UPDATE_USER_DATA,
+    payload: data,
   }),
 };

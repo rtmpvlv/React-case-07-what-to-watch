@@ -1,23 +1,26 @@
 import React, {useEffect} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {MoonLoader} from 'react-spinners';
 import {PageNotFound} from '../404/404';
 import {FilmPage} from '../film-page/film-page';
 import {MyList} from '../my-list/my-list';
 import {Player} from '../player/player';
 import {ReviewPage} from '../review/review';
-import {SignIn} from '../sign-in/sign-in';
+import SignIn from '../sign-in/sign-in';
 import Main from '../main/main';
-import {MoonLoader} from 'react-spinners';
-import {css} from "@emotion/react";
 import {APP_TYPES} from '../types';
+import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../constants';
-import {fetchFilmsList, fetchPromoFilm} from '../../store/api-actions';
+import {loadFilms, loadPromoFilm} from '../../store/api-actions';
 
-const override = css`
-  display: block;
-  margin: auto;
-`;
+const spinnerStyle = {
+  height: `100vh`,
+  width: `100vw`,
+  display: `flex`,
+  justifyContent: `center`,
+  alignItems: `center`,
+};
 
 export const App = ({films, isDataLoaded, isPromoLoaded, onLoadData}) => {
   useEffect(() => {
@@ -28,13 +31,8 @@ export const App = ({films, isDataLoaded, isPromoLoaded, onLoadData}) => {
 
   if (!isDataLoaded || !isPromoLoaded) {
     return (
-      <div style={{
-        height: `100vh`,
-        display: `flex`,
-        justifyContent: `center`,
-        alignItems: `center`,
-      }}>
-        <MoonLoader color='#000' css={override}/>
+      <div style={spinnerStyle}>
+        <MoonLoader color='#000'/>
       </div>
     );
   }
@@ -43,9 +41,9 @@ export const App = ({films, isDataLoaded, isPromoLoaded, onLoadData}) => {
     <Switch>
       <Route exact path={AppRoute.MAIN} render={() => <Main />} />
       <Route exact path={AppRoute.SIGN_IN} render={() => <SignIn />} />
-      <Route exact path={AppRoute.MY_LIST} render={() => <MyList films={films}/>} />
+      <PrivateRoute exact path={AppRoute.MY_LIST} render={() => <MyList films={films}/>} />
       <Route exact path={AppRoute.FILM_PAGE} render={() => <FilmPage films={films}/>} />
-      <Route exact path={AppRoute.REVIEW} render={() => <ReviewPage films={films}/>} />
+      <PrivateRoute exact path={AppRoute.REVIEW} render={() => <ReviewPage films={films}/>} />
       <Route exact path={AppRoute.PLAYER} render={() => <Player films={films}/>} />
       <Route render={() => <PageNotFound />} />
     </Switch>
@@ -65,8 +63,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoadData() {
-      dispatch(fetchFilmsList());
-      dispatch(fetchPromoFilm());
+      dispatch(loadFilms());
+      dispatch(loadPromoFilm());
     }
   };
 };

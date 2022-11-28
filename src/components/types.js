@@ -34,7 +34,7 @@ export const MAIN_TYPES = {
   onGenreChange: PropTypes.func.isRequired,
   selectedGenre: PropTypes.string.isRequired,
   filmsRendered: PropTypes.number.isRequired,
-  increaseRenderedFilmsQuantity: PropTypes.func.isRequired,
+  showMoreFilms: PropTypes.func.isRequired,
 };
 
 export const FILMS_DATA_TYPES = {
@@ -52,9 +52,23 @@ export const GENRES_LIST_TYPES = {
 
 export const SHOWMOREBUTTON_TYPES = {
   filmsRendered: PropTypes.number.isRequired,
-  showFilms: PropTypes.func.isRequired,
+  showMoreFilms: PropTypes.func.isRequired,
 };
 
 export const REVIEW_FORM_TYPES = {
   backgroundColor: PropTypes.string.isRequired,
+};
+
+export const PRIVATE_ROUTE_TYPES = {
+  authorizationStatus: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
+  render: PropTypes.func.isRequired,
+};
+
+export const USER = {
+  name: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };

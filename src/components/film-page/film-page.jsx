@@ -2,9 +2,8 @@ import React from 'react';
 import {useParams, useHistory, Link} from 'react-router-dom';
 import {FilmsList} from '../films-list/films-list';
 import {Footer} from '../footer/footer';
-import {HeaderLink} from '../header-link/header-link';
+import {PageHeader} from '../page-header/page-header';
 import {FILMS_DATA_TYPES} from '../types';
-import {UserBlock} from '../user-block/user-block';
 import {Tabs} from './tabs';
 
 const SIMILAR_LIST_LENGTH = 4;
@@ -30,14 +29,7 @@ export const FilmPage = ({films}) => {
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name} />
           </div>
-          <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <HeaderLink/>
-            </div>
-            <UserBlock/>
-          </header>
-
+          <PageHeader/>
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>

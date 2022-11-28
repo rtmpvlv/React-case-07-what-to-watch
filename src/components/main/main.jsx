@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {UserBlock} from "../user-block/user-block";
 import {FilmsList} from "../films-list/films-list";
 import GenresList from "./genres-list";
 import ShowMoreButton from "./show-more-button";
 import {Genres, FILMS_PER_CLICK} from "../../constants";
 import {MAIN_TYPES} from "../types";
 import {ActionCreator} from "../../store/action";
+import {PageHeader} from "../page-header/page-header";
 
 export const Main = (props) => {
   const {
@@ -18,6 +18,7 @@ export const Main = (props) => {
     filmsRendered,
     showMoreFilms,
   } = props;
+
   const {id, name, genre, released, posterImage, backgroundImage} = promoFilm;
   const history = useHistory();
 
@@ -46,17 +47,7 @@ export const Main = (props) => {
         <div className="movie-card__bg">
           <img src={backgroundImage} alt={name} />
         </div>
-        <h1 className="visually-hidden">WTW</h1>
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-          <UserBlock />
-        </header>
+        <PageHeader/>
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
@@ -144,6 +135,7 @@ const mapStateToProps = (state) => {
     promoFilm: state.promo,
     selectedGenre: state.selectedGenre,
     filmsRendered: state.filmsRendered,
+    authorizationStatus: state.authorizationStatus,
   };
 };
 

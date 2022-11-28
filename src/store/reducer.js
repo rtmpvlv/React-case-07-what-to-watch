@@ -8,9 +8,15 @@ const initialState = {
   promo: {},
   selectedGenre: Genres.ALL_GENRES,
   filmsRendered: FILMS_PER_CLICK,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
   isDataLoaded: false,
   isPromoLoaded: false,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  user: {
+    name: null,
+    avatarUrl: null,
+    email: null,
+    id: null,
+  }
 };
 
 export const reducer = (state = initialState, action) => {
@@ -41,10 +47,23 @@ export const reducer = (state = initialState, action) => {
         filmsRendered: action.payload,
       };
     }
-    case ActionType.REQUIRED_AUTHORIZATION: {
+    case ActionType.CHANGE_AUTHORIZATION_STATUS: {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    }
+    case ActionType.UPDATE_USER_DATA: {
+      const {name, avatar_url: avatarUrl, email, id} = action.payload;
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name,
+          avatarUrl,
+          email,
+          id,
+        }
       };
     }
     default: return state;
