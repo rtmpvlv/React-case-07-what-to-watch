@@ -11,12 +11,7 @@ const initialState = {
   isDataLoaded: false,
   isPromoLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  user: {
-    name: null,
-    avatarUrl: null,
-    email: null,
-    id: null,
-  }
+  user: null,
 };
 
 export const reducer = (state = initialState, action) => {

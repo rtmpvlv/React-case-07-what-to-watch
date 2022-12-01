@@ -67,8 +67,8 @@ export const PRIVATE_ROUTE_TYPES = {
 };
 
 export const USER = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   avatarUrl: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  id: PropTypes.string,
 };

@@ -3,7 +3,7 @@ import {HeaderLink} from '../header-link/header-link';
 import {FilmsList} from '../films-list/films-list';
 import {FILMS_DATA_TYPES} from '../types';
 import {Footer} from '../footer/footer';
-import {UserBlock} from '../user-block/user-block';
+import UserBlock from '../user-block/user-block';
 
 export const MyList = ({films}) => {
   const myFilmsList = films.filter((film) => film.isFavorite);

@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams, Link} from 'react-router-dom/cjs/react-router-dom.min';
 import {HeaderLink} from '../header-link/header-link';
 import {FILMS_DATA_TYPES} from '../types';
-import {UserBlock} from '../user-block/user-block';
+import UserBlock from '../user-block/user-block';
 import {ReviewForm} from './review-form';
 
 export const ReviewPage = ({films}) => {

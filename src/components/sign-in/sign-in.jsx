@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useState} from "react";
 import {connect} from "react-redux";
 import {useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
@@ -8,18 +8,14 @@ import {AppRoute} from "../../constants";
 import {login} from "../../store/api-actions";
 
 const SignIn = ({onSubmit}) => {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const history = useHistory();
-  const loginRef = useRef();
-  const passwordRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onSubmit({
-      email: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
-
+    onSubmit({email, password});
     history.push(AppRoute.MAIN);
   };
 
@@ -42,7 +38,7 @@ const SignIn = ({onSubmit}) => {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
-                  ref={loginRef}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <label
                   className="sign-in__label visually-hidden"
@@ -58,7 +54,7 @@ const SignIn = ({onSubmit}) => {
                   placeholder="Password"
                   name="user-password"
                   id="user-password"
-                  ref={passwordRef}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <label
                   className="sign-in__label visually-hidden"
