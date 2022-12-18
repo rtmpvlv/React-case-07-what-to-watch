@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {FILM_DATA_TYPES} from "../types";
 import {Overview} from "./overview";
 import {Details} from "./details";
-import {Reviews} from "./reviews";
+import Reviews from "./reviews";
 
 const ActiveTab = {
   OVERVIEW: `Overview`,
@@ -26,7 +26,7 @@ export const Tabs = ({film}) => {
       case ActiveTab.DETAILS:
         return <Details film={film} />;
       case ActiveTab.REVIEWS:
-        return <Reviews />;
+        return <Reviews film={film}/>;
       default:
         throw new Error(`Unexpected tab name.`);
     }

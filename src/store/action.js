@@ -1,6 +1,11 @@
 export const ActionType = {
-  FILMS_LIST_LOAD: `@filmsList/Load`,
-  PROMO_FILMS_LOAD: `@promo/Load`,
+  FILMS_LOAD: `@filmsList/Load`,
+  FILM_LOAD: `@film/Load`,
+  SET_FILM_ID: `@film/setFilmId`,
+  RESET_FILM: `@film/resetFilm`,
+  PROMO_FILM_LOAD: `@promo/Load`,
+  LOAD_REVIEWS: `@reviews/loadReviews`,
+  RESET_REVIEWS: `@reviews/resetReviews`,
   CHANGE_GENRE: `@genre/changeGenre`,
   INCREASE_FILMS_QUANTITY: `@films/increaseQuantity`,
   CHANGE_AUTHORIZATION_STATUS: `@user/changeAuthorizationStatus`,
@@ -8,13 +13,31 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  filmsListLoad: (films) => ({
-    type: ActionType.FILMS_LIST_LOAD,
+  loadFilms: (films) => ({
+    type: ActionType.FILMS_LOAD,
     payload: films,
   }),
+  loadFilm: (films) => ({
+    type: ActionType.FILM_LOAD,
+    payload: films,
+  }),
+  setFilmId: (id) => ({
+    type: ActionType.SET_FILM_ID,
+    payload: id,
+  }),
+  resetFilm: () => ({
+    type: ActionType.RESET_FILM,
+  }),
   promoFilmLoad: (promo) => ({
-    type: ActionType.PROMO_FILMS_LOAD,
+    type: ActionType.PROMO_FILM_LOAD,
     payload: promo,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
+  resetReviews: () => ({
+    type: ActionType.RESET_REVIEWS,
   }),
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,

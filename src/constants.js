@@ -7,6 +7,13 @@ export const AppRoute = {
   PLAYER: `/player/:id`,
 };
 
+export const ApiRequestURLs = {
+  FILMS: `/films/`,
+  LOGIN: `/login`,
+  PROMO_FILM: `/films/promo`,
+  REVIEWS: `/comments/`,
+};
+
 export const Genres = {
   ALL_GENRES: `All genres`,
   COMEDIES: `Comedy`,
@@ -26,10 +33,4 @@ export const FILMS_PER_CLICK = 8;
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
-};
-
-export const ApiRequestURLs = {
-  FILMS: `/films`,
-  LOGIN: `/login`,
-  PROMO_FILM: `/films/promo`
 };

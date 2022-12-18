@@ -1,5 +1,5 @@
 import React from "react";
-import {Card} from "../film-card/film-card";
+import Card from "../film-card/film-card";
 import {FILMS_DATA_TYPES} from "../types";
 
 export const FilmsList = (props) => {

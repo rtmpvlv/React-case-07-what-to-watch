@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const filmDataType = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -23,8 +23,8 @@ const filmDataType = PropTypes.shape({
 export const APP_TYPES = {
   films: PropTypes.arrayOf(filmDataType).isRequired,
   promo: filmDataType,
-  isDataLoaded: PropTypes.bool.isRequired,
-  isPromoLoaded: PropTypes.bool.isRequired,
+  isFilmsLoaded: PropTypes.bool.isRequired,
+  isPromoFilmLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
 };
 
@@ -42,7 +42,7 @@ export const FILMS_DATA_TYPES = {
 };
 
 export const FILM_DATA_TYPES = {
-  film: filmDataType
+  film: filmDataType,
 };
 
 export const GENRES_LIST_TYPES = {
@@ -59,16 +59,16 @@ export const REVIEW_FORM_TYPES = {
   backgroundColor: PropTypes.string.isRequired,
 };
 
-export const PRIVATE_ROUTE_TYPES = {
+export const PRIVATE_ROUTE_TYPES = PropTypes.shape({
   authorizationStatus: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
-};
+});
 
-export const USER = {
-  name: PropTypes.string,
+export const USER = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
-  email: PropTypes.string,
-  id: PropTypes.string,
-};
+});

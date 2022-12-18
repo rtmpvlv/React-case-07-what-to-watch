@@ -2,29 +2,32 @@ import React, {useState} from "react";
 import {REVIEW_FORM_TYPES} from "../types";
 
 const RATINGS = [`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`];
+const initialState = {
+  rating: 10,
+  comment: ``,
+};
 
 export const ReviewForm = (props) => {
-  const {backgroundColor} = props;
-  const [state, setState] = useState({
-    rating: null,
-    text: null,
-  });
+  const {backgroundColor, filmId, onPostReview} = props;
+  const [review, setReview] = useState(initialState);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    onPostReview(filmId, review);
+    setReview(initialState);
   };
 
   const handleRatingChange = (evt) => {
-    setState({
-      ...state,
-      rating: evt.target.value,
+    setReview({
+      ...review,
+      rating: parseInt(evt.target.value, 10),
     });
   };
 
   const handleTextChange = (evt) => {
-    setState({
-      ...state,
-      text: evt.target.value,
+    setReview({
+      ...review,
+      comment: evt.target.value,
     });
   };
 
@@ -32,7 +35,7 @@ export const ReviewForm = (props) => {
     <div className="rating">
       <div className="rating__stars">
         {RATINGS.map((rating) => (
-          <>
+          <React.Fragment key={rating}>
             <input
               className="rating__input"
               id={`star-${rating}`}
@@ -45,7 +48,7 @@ export const ReviewForm = (props) => {
               className="rating__label"
               htmlFor={`star-${rating}`}
             >{`Rating ${rating}`}</label>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>
@@ -64,6 +67,7 @@ export const ReviewForm = (props) => {
           id="review-text"
           placeholder="Review text"
           onChange={handleTextChange}
+          value={review.comment}
         ></textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit">

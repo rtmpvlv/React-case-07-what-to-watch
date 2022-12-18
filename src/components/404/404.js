@@ -1,13 +1,13 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
-import {AppRoute} from '../../constants';
-import {Footer} from '../footer/footer';
-import {HeaderLink} from '../header-link/header-link';
+import React from "react";
+import {useHistory} from "react-router-dom";
+import {AppRoute} from "../../constants";
+import {Footer} from "../footer/footer";
+import {HeaderLink} from "../header-link/header-link";
 
 export const PageNotFound = () => {
   const history = useHistory();
 
-  const handleGoToMain = () => {
+  const handleClick = () => {
     history.push(AppRoute.MAIN);
   };
 
@@ -15,20 +15,17 @@ export const PageNotFound = () => {
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <HeaderLink/>
+          <HeaderLink />
         </div>
         <h1 className="page-title user-page__title">This page is not found.</h1>
       </header>
-      <div className="sign-in user-page__content">
-        <div
-          className="sign-in__message"
-          onClick={handleGoToMain}
-        >
+      <div className="sign-in user-page__content" onClick={handleClick}>
+        <div className="sign-in__message">
           <p>Error 404 - Page not found. </p>
           <p>Click here to return to the main page.</p>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

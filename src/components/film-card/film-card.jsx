@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import {FILM_DATA_TYPES} from "../types";
 import {Video} from "../video/video";
 
-export const Card = ({film}) => {
+export const Card = (props) => {
+  const {film, onSetFilmId} = props;
   const {id, name, posterImage} = film;
 
   const history = useHistory();
@@ -13,6 +16,7 @@ export const Card = ({film}) => {
   const handleOpenFilmCard = () => {
     clearTimeout(timer);
     setIsPlaying(false);
+    onSetFilmId(id);
     history.push(`/films/${id}`);
   };
 
@@ -49,3 +53,13 @@ export const Card = ({film}) => {
 };
 
 Card.propTypes = FILM_DATA_TYPES;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSetFilmId(id) {
+      dispatch(ActionCreator.setFilmId(id));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Card);
